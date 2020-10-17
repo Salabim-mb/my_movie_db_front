@@ -7,21 +7,20 @@ import {backend} from "../../constants/backend";
 const getMovies = async () => {
     // jeszcze nie wiemy jakie będą headery do zapytania, ale piszę na czuja
     const headers = {
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json", // będziemy wysyłać dane jsonem
     };
     // zmienna domain jest zła, tu normalnie będzie url, ale trzymamy go w pliku .env
     // o .env nie chce mi się pisać za bardzo, wytłuamczę na żywo że to są
     // zmienne środowiskowe
-    let domain = "";
     const url = backend.MOVIES;
-
     // bez await dostaniemy Promise, czyli obietnicę że to zostanie wypełnione
     // nie chcemy działać na promisach, więc dajemy await żeby poczekać aż promise zostanie
     // rozwiązany, po czym działamy na pierwszej "warstwie" odpowiedzi, czyli
     // metadanych (status HTTP itd) oraz body jako kolejny promise
     let res = await fetch(url, {
         headers,
-        method: "GET",
+        method: "GET"
         // do GETa nie potrzeba body, ale przy innych metodach czasami tak. W związku z tym wrzucamy wtedy
         // body: JSON.stringify( obiekt_przekazany_jako_argument )
         // powyższa metoda zamienia obiekt na jsona
@@ -34,9 +33,9 @@ const getMovies = async () => {
     }
 };
 
-const mapMovies = (data) => data.map({
+const mapMovies = (data) => data.map((item) => ({
     //... pola do używania w movieListm o ile używane są inne niż te z odpowiedzi od backendu
-});
+}));
 
 const MovieList = () => {
     /*
@@ -92,7 +91,7 @@ const MovieList = () => {
                 error ? renderErrorAlert() :
                 loading ? renderSpinner() :
                 movieList.map((item) => (
-                    <MovieCard key={item.id} movie={item} />
+                    <MovieCard key={item?.id} movie={item} />
                 ))
             }
         </Page>

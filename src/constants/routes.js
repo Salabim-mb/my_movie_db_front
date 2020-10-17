@@ -1,3 +1,5 @@
+import MovieList from "../components/MovieList";
+
 const paths = {
     MAIN: "/",
     LOGIN: "/login",
@@ -9,11 +11,13 @@ const paths = {
 export default [
     {
         path: paths.MAIN,
-        exact: true
+        exact: true,
+        component: MovieList
     },
     {
         path: paths.MOVIES,
-        exact: true
+        exact: true,
+        component: MovieList
     },
     {
         path: paths.NEW_MOVIE,

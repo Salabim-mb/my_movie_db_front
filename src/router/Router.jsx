@@ -6,21 +6,17 @@ const Router = () => {
     const location = useLocation();
 
     return (
-        () => {
-            return (
-                <Switch location={location} key={location.pathname}>
-                    {routes.map(
-                        ({component: Component, path, ...rest}) => {
-                            return (
-                                <Route path={path} key={path} {...rest}>
-                                    <Component {...rest} />
-                                </Route>
-                            );
-                        }
-                    )}
-                </Switch>
-            );
-        }
+        <Switch location={location} key={location.pathname}>
+            {routes.map(
+                ({component: Component, path, ...rest}) => {
+                    return (
+                        <Route path={path} key={path} {...rest}>
+                            <Component {...rest} />
+                        </Route>
+                    );
+                }
+            )}
+        </Switch>
     )
 };
 
