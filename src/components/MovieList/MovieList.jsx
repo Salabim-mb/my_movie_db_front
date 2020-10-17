@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Page from "../Page";
+import MovieCard from "./components/MovieCard";
+import {Alert, Spinner} from "react-bootstrap";
+import {backend} from "../../constants/backend";
 
 const getMovies = async () => {
     // jeszcze nie wiemy jakie będą headery do zapytania, ale piszę na czuja
@@ -10,7 +13,7 @@ const getMovies = async () => {
     // o .env nie chce mi się pisać za bardzo, wytłuamczę na żywo że to są
     // zmienne środowiskowe
     let domain = "";
-    const url = domain + "/moj-endpoint/daj-filmy/";
+    const url = backend.MOVIES;
 
     // bez await dostaniemy Promise, czyli obietnicę że to zostanie wypełnione
     // nie chcemy działać na promisach, więc dajemy await żeby poczekać aż promise zostanie
@@ -72,19 +75,26 @@ const MovieList = () => {
     }, []);
 
     // metoda na pokazanie alertu kiedy ustawi się error = true
-    const rendeErrorAlert = () => {
-
+    const renderErrorAlert = () => {
+        return <Alert variant="danger">Something went wrong while trying to get movie list.</Alert>
     };
 
     // metoda na pokazanie spinnera ładowania kiedy loading = true
     const renderSpinner = () => {
-
+        return <Spinner animation="border" role="status" />
     };
 
     return (
         <Page>
             {/*{ można wyszukiwarkę dopisać, czysto frontendowa }*/}
-
+            {/*{ tutaj będzie lista, czyli zmapowana movieList, ale najpierw error i loading }*/}
+            {
+                error ? renderErrorAlert() :
+                loading ? renderSpinner() :
+                movieList.map((item) => (
+                    <MovieCard key={item.id} movie={item} />
+                ))
+            }
         </Page>
     )
 };
