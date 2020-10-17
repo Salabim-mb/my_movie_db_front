@@ -2,7 +2,11 @@ import React from 'react';
 import routes from "../constants/routes"
 import {Route, Switch, useLocation} from "react-router";
 
-const Router = () => {
+const Router = (props) => {
+    // nazwa = (props) => {...}, argumentów używamy props.arg1, props.arg2 itd
+    // nazwa = ({arg1, arg2}) => {...}, argumentów używamy arg1, arg2 itd
+
+    // useLocation korzysta z window.location
     const location = useLocation();
 
     return (
