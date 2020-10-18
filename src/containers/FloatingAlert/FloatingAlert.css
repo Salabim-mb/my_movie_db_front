@@ -1,0 +1,66 @@
+@keyframes AlertAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    12% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    88% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes ConAnimation {
+    0% {
+        transform: translateX(-50%) scale(0);
+    }
+    1% {
+        transform: translateX(-50%) scale(1);
+    }
+    99% {
+        transform: translateX(-50%) scale(1);
+    }
+    100% {
+        transform: translateX(-50%) scale(0);
+    }
+}
+
+.alertMsg {
+    transition: 0.15s linear;
+    opacity: 0;
+    transform: translateY(-50%);
+    animation: AlertAnimation 6s forwards;
+}
+
+.alertMsg--scale {
+    position: fixed;
+    top: 5vh;
+    left: 50%;
+    z-index: 1100;
+    width: 100%;
+    padding: 0 0.5rem;
+    animation: ConAnimation 6s forwards;
+}
+
+.alertMsg--scale--visible {
+    transform: scale(1) translateX(-50%);
+}
+
+@media (min-width: 576px) {
+    .alertMsg--scale {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 768px) {
+    .alertMsg--scale {
+        top: 5vh;
+    }
+}
