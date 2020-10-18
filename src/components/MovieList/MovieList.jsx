@@ -33,17 +33,18 @@ const getMovies = async () => {
     }
 };
 
-const mapMovies = (data) => data.map((item) => ({
-    //... pola do używania w movieListm o ile używane są inne niż te z odpowiedzi od backendu
-}));
+/* const mapMovies = (data) => data.map((item) => ({
+   //... pola do używania w movieListm o ile używane są inne niż te z odpowiedzi od backendu
+
+})); */
 
 const MovieList = () => {
-    /*
-        poniżej pokazany jest sposób zapisu stanu komponenetu funkcyjnego, taka składnia zastępuje konstruktor
-        komponent klasowy (taki sam) umieszczę w MovieListClassComponent.jsx
-        loading, error - boolean (stan początkowy false)
-        movieList - lista, dlatego mamy useState([])
-     */
+   /*
+       poniżej pokazany jest sposób zapisu stanu komponenetu funkcyjnego, taka składnia zastępuje konstruktor
+       komponent klasowy (taki sam) umieszczę w MovieListClassComponent.jsx
+       loading, error - boolean (stan początkowy false)
+       movieList - lista, dlatego mamy useState([])
+    */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [movieList, setMovieList] = useState([]);
@@ -58,7 +59,7 @@ const MovieList = () => {
                 // (najczęściej będzie to 400 Bad Request xd)
                 let res = await getMovies();
                 // mamy odpowiedź, teraz trzeba ją zmapować, bo backend może używać innych nazw pól
-                setMovieList( mapMovies(res) );
+                setMovieList( res ); //mapMovies(res)
             } catch(e) {
                 // nie wyszło z GET'em, więc można wypisać na konsolę to co rzuciliśmy w getMovies()
                 // i ustawić flagę error na true
