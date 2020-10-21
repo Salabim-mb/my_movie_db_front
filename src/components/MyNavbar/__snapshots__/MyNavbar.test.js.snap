@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyNavbar should match snapshot 1`] = `
+<div>
+  <nav
+    class="navbar navbar-expand navbar-dark bg-dark"
+  >
+    <div
+      class="navbar-nav"
+    >
+      <a
+        class="active nav-link"
+        data-rb-event-key="/"
+        href="/"
+      >
+        <span
+          class="navbar-brand"
+        >
+          MyMovieDB
+        </span>
+      </a>
+    </div>
+    <div
+      class="justify-content-end navbar-collapse collapse"
+    >
+      <a
+        class="btn btn-success"
+        href="/movies/new"
+      >
+        + Add movie
+      </a>
+    </div>
+  </nav>
+</div>
+`;
