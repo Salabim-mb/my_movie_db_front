@@ -1,0 +1,8 @@
+.react-datepicker-wrapper {
+    display: block;
+}
+
+.spinner {
+    justify-content: center;
+    display: flex;
+}
