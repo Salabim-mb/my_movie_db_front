@@ -6,10 +6,10 @@ import './MovieCard.css';
 const MovieCard = ({movie}) => (
     <div className="card mb-3">
         <div className="row no-gutters">
-            <div className="">
-                <Card.Img src="https://fwcdn.pl/fpo/63/51/236351/7198307.6.jpg"/> {/*{movie.movieImage}*/}
+            <div className="ThumbnailImage">
+                <Card.Img src={movie.movieImage}/> {/*{movie.movieImage}*/}
             </div>
-            <div className="col-sm-8">
+            <div className="col-sm-9">
                 <div className="MovieCard">
                     <div className="card-body">
                         <Card.Title>

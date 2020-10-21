@@ -1,3 +1,8 @@
 .MovieCard {
-    text-align: left;
+    text-align: justify;
+    margin-left: 3%;
+}
+
+.ThumbnailImage {
+    max-width: 180px;
 }
