@@ -7,18 +7,7 @@ const paths = {
 };
 
 export default [
-    {
-        path: paths.MAIN,
-        exact: true
-    },
-    {
-        path: paths.MOVIES,
-        exact: true
-    },
-    {
-        path: paths.NEW_MOVIE,
-        exact: true
-    }
+
 ]
 
 export {paths};
