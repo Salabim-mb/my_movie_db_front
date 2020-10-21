@@ -10,22 +10,17 @@ const Router = (props) => {
     const location = useLocation();
 
     return (
-        // poniżej arrow function, zamiast tego można by napisać function() {...}, ale to czasami psuje odniesienie z this, więc ja np nie lubię xd
-        () => {
-            return (
-                <Switch location={location} key={location.pathname}>
-                    {routes.map(
-                        ({component: Component, path, ...rest}) => {
-                            return (
-                                <Route path={path} key={path} {...rest}>
-                                    <Component {...props} {...rest} />
-                                </Route>
-                            );
-                        }
-                    )}
-                </Switch>
-            );
-        }
+        <Switch location={location} key={location.pathname}>
+            {routes.map(
+                ({component: Component, path, ...rest}) => {
+                    return (
+                        <Route path={path} key={path} {...rest}>
+                            <Component {...rest} />
+                        </Route>
+                    );
+                }
+            )}
+        </Switch>
     )
 };
 
