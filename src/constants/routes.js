@@ -1,4 +1,5 @@
 import MovieForm from "../components/MovieForm/MovieForm";
+import MovieList from "../components/MovieList";
 
 const paths = {
     MAIN: "/",
@@ -19,6 +20,11 @@ export default [
         path: paths.EDIT_MOVIE,
         exact: true,
         component: MovieForm
+    },
+    {
+        path: paths.MOVIES,
+        exact: true,
+        component: MovieList
     }
 ]
 
