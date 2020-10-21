@@ -33,11 +33,6 @@ const getMovies = async () => {
     }
 };
 
-/* const mapMovies = (data) => data.map((item) => ({
-   //... pola do używania w movieListm o ile używane są inne niż te z odpowiedzi od backendu
-
-})); */
-
 const MovieList = () => {
    /*
        poniżej pokazany jest sposób zapisu stanu komponenetu funkcyjnego, taka składnia zastępuje konstruktor
@@ -59,7 +54,9 @@ const MovieList = () => {
                 // (najczęściej będzie to 400 Bad Request xd)
                 let res = await getMovies();
                 // mamy odpowiedź, teraz trzeba ją zmapować, bo backend może używać innych nazw pól
-                setMovieList( res ); //mapMovies(res)
+
+                setMovieList( res );
+
             } catch(e) {
                 // nie wyszło z GET'em, więc można wypisać na konsolę to co rzuciliśmy w getMovies()
                 // i ustawić flagę error na true

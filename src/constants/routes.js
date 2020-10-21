@@ -10,19 +10,10 @@ const paths = {
 
 export default [
     {
-        path: paths.MAIN,
-        exact: true,
-        component: MovieList
-    },
-    {
         path: paths.MOVIES,
         exact: true,
         component: MovieList
-    },
-    {
-        path: paths.NEW_MOVIE,
-        exact: true
-    }
+    }r
 ]
 
 export {paths};
