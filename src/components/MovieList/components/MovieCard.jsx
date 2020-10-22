@@ -8,7 +8,7 @@ import {backend} from "../../../constants/backend";
 
 const removeMovie = async (id) => {
     const headers = {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
     };
 
@@ -65,7 +65,7 @@ const MovieCard = ({movie, setlist}) => {
                             </Card.Subtitle>
                             <p className="card-text"><small className="text-muted">{movie.movieGenre}</small></p>
                             <Card.Text>
-                                {movie.movieReleaseDate}
+                                {movie.movieReleaseDate.substring(0,4)}
                             </Card.Text>
                             <hr/>
                             <p className="card-text">{movie.movieDescription} </p>
