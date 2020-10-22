@@ -8,7 +8,7 @@ import {backend} from "../../../constants/backend";
 
 const removeMovie = async (id) => {
     const headers = {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
         "Content-Type": "application/json",
     };
 
@@ -32,7 +32,7 @@ const MovieCard = ({movie, setlist}) => {
         event.preventDefault();
         try {
             await removeMovie(movie.id);
-            setlist(movie.id)
+            setlist(movie.id);
         } catch(e) {
             console.log(e);
         }
@@ -65,7 +65,7 @@ const MovieCard = ({movie, setlist}) => {
                             </Card.Subtitle>
                             <p className="card-text"><small className="text-muted">{movie.movieGenre}</small></p>
                             <Card.Text>
-                                {movie.movieReleaseYear}
+                                {movie.movieReleaseDate}
                             </Card.Text>
                             <hr/>
                             <p className="card-text">{movie.movieDescription} </p>
