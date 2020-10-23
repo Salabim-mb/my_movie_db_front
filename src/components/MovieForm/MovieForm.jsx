@@ -77,6 +77,7 @@ const MovieForm = () => {
     const location = useParams();
 
     useEffect(() => {
+        console.log(location)
         const loadMovie = async () => {
             setLoading(true);
             try {
@@ -171,6 +172,20 @@ const MovieForm = () => {
                                 name="genre"
                                 required
                                 placeholder="Sci-Fi"
+                                type="text"
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide genre
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Director</Form.Label>
+                            <Form.Control
+                                value={data.director}
+                                onChange={(e) => setData({...data, director: e.target.value})}
+                                name="director"
+                                required
+                                placeholder="Christopher Nolan"
                                 type="text"
                             />
                             <Form.Control.Feedback type="invalid">
