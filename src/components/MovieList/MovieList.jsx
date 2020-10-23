@@ -81,9 +81,9 @@ const MovieList = () => {
         return <Spinner animation="border" role="status" />
     };
 
-    const dupa = (id) => {
-        let zmienna = movieList.filter(item => item.id !== id);
-        setMovieList(zmienna)
+    const newMovieList = (id) => {
+        let movies = movieList.filter(item => item.id !== id);
+        setMovieList(movies)
     }
 
     return (
@@ -94,7 +94,7 @@ const MovieList = () => {
                 error ? renderErrorAlert() :
                 loading ? renderSpinner() :
                 movieList.map((item) => (
-                    <MovieCard key={item?.id} movie={item} setlist={dupa}/>
+                    <MovieCard key={item?.id} movie={item} setlist={newMovieList}/>
                 ))
             }
         </Page>
