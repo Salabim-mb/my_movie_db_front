@@ -94,7 +94,7 @@ const MovieList = () => {
                 error ? renderErrorAlert() :
                 loading ? renderSpinner() :
                 movieList.map((item) => (
-                    <MovieCard key={item?.id} movie={item} setlist={refreshMovieList()}/>
+                    <MovieCard key={item?.id} movie={item} setlist={refreshMovieList}/>
                 ))
             }
         </Page>

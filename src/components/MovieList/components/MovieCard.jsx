@@ -74,7 +74,7 @@ const MovieCard = ({movie, setlist}) => {
                             </Card.Subtitle>
                             <p className="card-text"><small className="text-muted">{movie.movieGenre}</small></p>
                             <Card.Text>
-                                {movie.movieReleaseDate.getFullYear()}
+                                {(new Date(movie.movieReleaseDate)).getFullYear()}
                             </Card.Text>
                             <hr/>
                             <p className="card-text">{movie.movieDescription} </p>
