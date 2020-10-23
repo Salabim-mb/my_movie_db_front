@@ -49,7 +49,7 @@ const mapResponseData = (source) => ({
     genre: source.movieGenre,
     director: source.movieDirector,
     description: source.movieDescription,
-    releaseYear: new Date( source.movieReleaseYear ),
+    releaseDate: new Date( source.movieReleaseDate ),
     image: source?.movieImage || null
 });
 
@@ -58,7 +58,7 @@ const MovieForm = () => {
         name: "",
         director: "",
         genre: "",
-        releaseYear: undefined,
+        releaseDate: undefined,
         image: null,
         description: ""
     });
@@ -96,10 +96,10 @@ const MovieForm = () => {
     }, [location.id]);
 
     const prepareData = () => ({
-        movieTitle: data.title,
+        movieName: data.name,
         movieDirector: data.director,
         movieGenre: data.genre,
-        movieReleaseYear: data.releaseYear.toISOString(),
+        movieReleaseDate: data.releaseDate.toISOString(),
         movieDescription: data.description,
         movieImage: data.image
     });
@@ -114,8 +114,8 @@ const MovieForm = () => {
         } else {
             setValidated(true);
             try {
-                prepareData();
-                await sendMovie(method, data, location?.id);
+            //    prepareData();
+                await sendMovie(method, prepareData(), location?.id);
                 setResCorrect(true);
             } catch(e) {
                 console.log(e);
@@ -198,8 +198,8 @@ const MovieForm = () => {
                                 className="form-control"
                                 placeholderText="2014"
                                 dateFormat="yyyy"
-                                selected={data.releaseYear}
-                                onChange={(e) => setData({...data, releaseYear: e})}
+                                selected={data.releaseDate}
+                                onChange={(e) => setData({...data, releaseDate: e})}
                                 showYearPicker
                                 required
                                 minDate={(new Date()).setFullYear(1900)}
