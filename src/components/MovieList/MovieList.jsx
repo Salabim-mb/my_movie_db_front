@@ -81,7 +81,7 @@ const MovieList = () => {
         return <Spinner animation="border" role="status" />
     };
 
-    const newMovieList = (id) => {
+    const refreshMovieList = (id) => {
         let movies = movieList.filter(item => item.id !== id);
         setMovieList(movies)
     }
@@ -94,7 +94,7 @@ const MovieList = () => {
                 error ? renderErrorAlert() :
                 loading ? renderSpinner() :
                 movieList.map((item) => (
-                    <MovieCard key={item?.id} movie={item} setlist={newMovieList}/>
+                    <MovieCard key={item?.id} movie={item} setlist={refreshMovieList()}/>
                 ))
             }
         </Page>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import './MovieCard.css';
@@ -6,7 +6,10 @@ import {paths} from "../../../constants/routes";
 import {IndexLinkContainer} from "react-router-bootstrap";
 import {backend} from "../../../constants/backend";
 
+
+
 const removeMovie = async (id) => {
+
     const headers = {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -25,16 +28,22 @@ const removeMovie = async (id) => {
     } else {
         throw res.status; // jeżeli status nie jest ok to go łapiemy w bloku try/catch metody loadMovieList()
     }
+
 };
 
 const MovieCard = ({movie, setlist}) => {
+
+    const [disabled, setDisabled] = useState(false);
     const handleRemoveMovie = async (event) => {
+        setDisabled(true);
         event.preventDefault();
         try {
             await removeMovie(movie.id);
             setlist(movie.id);
         } catch(e) {
             console.log(e);
+        } finally {
+            setDisabled(false);
         }
     }
 
@@ -42,14 +51,14 @@ const MovieCard = ({movie, setlist}) => {
         <div className="card mb-3">
             <div className="row no-gutters">
                 <div className="ThumbnailImage">
-                    <Card.Img src={movie.movieImage}/>
+                    <Card.Img alt="Movie image" src={movie.movieImage}/>
                 </div>
                 <div className="Button">
                     <IndexLinkContainer to={paths.NEW_MOVIE+"/"+movie.id}>
                         <Button variant="warning" size="sm">Edit</Button>
                     </IndexLinkContainer>
                     <div className="ButtonRemove" onClick={handleRemoveMovie}>
-                        <Button variant="danger" size="sm">Remove</Button>
+                        <Button variant="danger" size="sm" disabled={disabled}>Remove</Button>
                     </div>
                 </div>
 
@@ -65,7 +74,7 @@ const MovieCard = ({movie, setlist}) => {
                             </Card.Subtitle>
                             <p className="card-text"><small className="text-muted">{movie.movieGenre}</small></p>
                             <Card.Text>
-                                {movie.movieReleaseDate.substring(0,4)}
+                                {movie.movieReleaseDate.getFullYear()}
                             </Card.Text>
                             <hr/>
                             <p className="card-text">{movie.movieDescription} </p>
