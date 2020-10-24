@@ -1,12 +1,34 @@
 import React from "react";
-import MovieCard from "./components/MovieCard";
-import {render, waitForElement} from '@testing-library/react';
+import MovieCard from "./MovieCard";
+import {fireEvent, render, waitForElement} from '@testing-library/react';
+import {MemoryRouter} from "react-router";
+import {createMemoryHistory} from 'history';
+import MyNavbar from "../../MyNavbar";
+import {paths} from "../../../constants/routes";
+import {Router} from "react-router-dom";
+import {backend} from "../../../constants/backend";
 
 
+const renderWithRouter = (
+    ui,
+    {
+        route = "/non-existent-route",
+        history = createMemoryHistory({ initialEntries: [route] })
+    } = {}
+) => {
+    return {
+        ...render(
+            <Router history={history}>{ui}</Router>
+        ),
+        history
+    }
+};
 
 describe("MovieCard", () => {
     let apiFail;
     let res;
+    let data;
+    let setList;
 
     beforeAll(() => {
         global.fetch = jest.fn().mockImplementation((input, init) => {
@@ -22,8 +44,9 @@ describe("MovieCard", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        MovieCard.mockImplementation((props) => <div>{props?.movie?.title}</div>);
+
         apiFail = false;
+        setList = jest.fn();
         res = [
             {
                 id: 1,
@@ -32,46 +55,89 @@ describe("MovieCard", () => {
                 id: 2,
                 title: "Batman"
             }
-        ]
+        ];
+        data =
+            {
+                id: 3,
+                movieName: "KOD NIEŚMIERTELNOŚCI",
+                movieDirector: "Duncan Jones",
+                movieGenre: "Thriller / Sci-Fi",
+                movieReleaseDate: "2011-03-11T00:00:00.605Z",
+                movieImage: "someImageInBase64",
+                movieDescription: "Kapitan Colter Stevens budzi się, nie pamiętając niczego. Wkrótce odkrywa, że bierze udział w misji, której celem jest złapanie terrorysty podkładającego bomby na terenie Chicago."
+            };
+
     });
 
-    it("should match snapshot", async () => {
+    it("should match snapshot", () => {
         const {container, getByText} = render(
             <MemoryRouter>
-                <MovieList />
+                <MovieCard movie={data} setlist={setList}/>
             </MemoryRouter>
-        );
 
-        await waitForElement(() => getByText("Titanic"));
+        );
 
         expect(container).toMatchSnapshot();
     });
 
-    it("should fetch correct data", async () => {
-        const {getByText, queryByText} = render(
+    it("should show correct data", () => {
+        const {getByText, getByAltText} = render(
             <MemoryRouter>
-                <MovieList />
-            </MemoryRouter>
-        );
-        await waitForElement(() => getByText("Titanic"));
-
-        expect(getByText("Titanic")).toBeInTheDocument();
-        expect(queryByText("Something went wrong", {exact: false})).toBe(null);
-        //expect(queryByText("Something went wrong", {exact: false})).not.toBeInTheDocument();
-    });
-
-    it ("should render error alert", async () => {
-        apiFail = true;
-
-        const {getByText, queryByText} = render(
-            <MemoryRouter>
-                <MovieList />
+                <MovieCard movie={data} setlist={setList}/>
             </MemoryRouter>
         );
 
-        await waitForElement(() => getByText("Something went wrong", {exact: false}));
+        expect(getByText("KOD NIEŚMIERTELNOŚCI")).toBeInTheDocument();
+        expect(getByText("Duncan Jones")).toBeInTheDocument();
+        expect(getByText("Thriller / Sci-Fi")).toBeInTheDocument();
+        expect(getByText("2011")).toBeInTheDocument();
+        expect(getByText("Thriller / Sci-Fi")).toBeInTheDocument();
+        expect(getByAltText("Movie image")).toBeInTheDocument();
+        expect(getByText("budzi się, nie pamiętając niczego.", {exact:false})).toBeInTheDocument();
 
-        expect(getByText("Something went wrong", {exact: false})).toBeInTheDocument();
-        expect(queryByText("Batman")).not.toBeInTheDocument();
+
     });
+
+    it("should not called setlist", () => {
+        const {} = render(
+            <MemoryRouter>
+                <MovieCard movie={data} setlist={setList}/>
+            </MemoryRouter>
+        );
+        expect(setList).toHaveBeenCalledTimes(0);
+    });
+
+    it("should redirect to edit form", () => {
+        const {history, getByText} = renderWithRouter(
+                <MovieCard movie={data} setlist={setList}/>
+        );
+
+        fireEvent.click( getByText("Edit") );
+        expect(history.location.pathname).toBe(paths.NEW_MOVIE+"/" + data.id, {exact: false});
+    });
+
+    it("should redirect to edit form", () => {
+        const {history, getByText} = renderWithRouter(
+            <MovieCard movie={data} setlist={setList}/>
+        );
+
+        fireEvent.click( getByText("Edit") );
+        expect(history.location.pathname).toBe(paths.NEW_MOVIE+"/" + data.id, {exact: false});
+    });
+
+    it("should not find movie", () => {
+        const {getByText, toHaveBeenCalledWith} = render(
+            <MemoryRouter>
+                <MovieCard movie={data} setlist={setList}/>
+            </MemoryRouter>
+        );
+        let url = backend.MOVIES + data.id + "/";
+        const headers = {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+        };
+        fireEvent.click( getByText("Remove") );
+        expect(fetch).toHaveBeenCalledWith(url, {headers, "method": "DELETE"});
+    });
+
 });

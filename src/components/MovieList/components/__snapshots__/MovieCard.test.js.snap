@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard should match snapshot 1`] = `
+<div>
+  <div
+    class="card mb-3"
+  >
+    <div
+      class="row no-gutters"
+    >
+      <div
+        class="ThumbnailImage"
+      >
+        <img
+          alt="Movie image"
+          class="card-img"
+          src="someImageInBase64"
+        />
+      </div>
+      <div
+        class="Button"
+      >
+        <a
+          class="btn btn-warning btn-sm"
+          href="/movies/new/3"
+        >
+          Edit
+        </a>
+        <div
+          class="ButtonRemove"
+        >
+          <button
+            class="btn btn-danger btn-sm"
+            type="button"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+      <div
+        class="col-sm-9"
+      >
+        <div
+          class="MovieCard"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="card-title h5"
+            >
+              KOD NIEŚMIERTELNOŚCI
+            </div>
+            <div
+              class="mb-2 text-muted card-subtitle h6"
+            >
+              Duncan Jones
+            </div>
+            <p
+              class="card-text"
+            >
+              <small
+                class="text-muted"
+              >
+                Thriller / Sci-Fi
+              </small>
+            </p>
+            <p
+              class="card-text"
+            >
+              2011
+            </p>
+            <hr />
+            <p
+              class="card-text"
+            >
+              Kapitan Colter Stevens budzi się, nie pamiętając niczego. Wkrótce odkrywa, że bierze udział w misji, której celem jest złapanie terrorysty podkładającego bomby na terenie Chicago.
+               
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
