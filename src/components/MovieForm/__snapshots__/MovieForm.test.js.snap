@@ -1,0 +1,363 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieForm GET & PUT should match snapshot filled 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+          novalidate=""
+        >
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="name"
+            >
+              Movie title
+            </label>
+            <input
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Interstellar"
+              required=""
+              type="text"
+              value="Interstellar"
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide movie title
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="director"
+            >
+              Director
+            </label>
+            <input
+              class="form-control"
+              id="director"
+              name="director"
+              placeholder="Christopher Nolan"
+              required=""
+              type="text"
+              value="Christopher Nolan"
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide movie director
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="genre"
+            >
+              Genre
+            </label>
+            <input
+              class="form-control"
+              id="genre"
+              name="genre"
+              placeholder="Sci-Fi"
+              required=""
+              type="text"
+              value="Sci-Fi"
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide genre
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="releaseDate"
+            >
+              Year of release
+            </label>
+            <div
+              class="react-datepicker-wrapper"
+            >
+              <div
+                class="react-datepicker__input-container"
+              >
+                <input
+                  class="form-control"
+                  placeholder="2014"
+                  required=""
+                  type="text"
+                  value="2020"
+                />
+              </div>
+            </div>
+            <div
+              class="invalid-feedback"
+            >
+              Please provide a release year
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="description"
+            >
+              Description
+            </label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              placeholder="Very cool movie!"
+              required=""
+              rows="3"
+            >
+              Very cool movie!
+            </textarea>
+            <div
+              class="invalid-feedback"
+            >
+              Please provide a short description
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="image"
+            >
+              Movie poster
+            </label>
+            <div
+              class="text-nowrap text-truncate custom custom-file"
+            >
+              <input
+                accept="image/*"
+                class="custom-file-input"
+                id="image"
+                type="file"
+              />
+              <label
+                class="custom-file-label"
+                data-browse="Add poster"
+                for="image"
+              >
+                Previous photo
+              </label>
+            </div>
+          </div>
+          <button
+            class="btn btn-success"
+            type="submit"
+          >
+            Update movie
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MovieForm POST should match snapshot 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+          novalidate=""
+        >
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="name"
+            >
+              Movie title
+            </label>
+            <input
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Interstellar"
+              required=""
+              type="text"
+              value=""
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide movie title
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="director"
+            >
+              Director
+            </label>
+            <input
+              class="form-control"
+              id="director"
+              name="director"
+              placeholder="Christopher Nolan"
+              required=""
+              type="text"
+              value=""
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide movie director
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="genre"
+            >
+              Genre
+            </label>
+            <input
+              class="form-control"
+              id="genre"
+              name="genre"
+              placeholder="Sci-Fi"
+              required=""
+              type="text"
+              value=""
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide genre
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="releaseDate"
+            >
+              Year of release
+            </label>
+            <div
+              class="react-datepicker-wrapper"
+            >
+              <div
+                class="react-datepicker__input-container"
+              >
+                <input
+                  class="form-control"
+                  placeholder="2014"
+                  required=""
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="invalid-feedback"
+            >
+              Please provide a release year
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="description"
+            >
+              Description
+            </label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              placeholder="Very cool movie!"
+              required=""
+              rows="3"
+            />
+            <div
+              class="invalid-feedback"
+            >
+              Please provide a short description
+            </div>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="image"
+            >
+              Movie poster
+            </label>
+            <div
+              class="text-nowrap text-truncate custom custom-file"
+            >
+              <input
+                accept="image/*"
+                class="custom-file-input"
+                id="image"
+                type="file"
+              />
+              <label
+                class="custom-file-label"
+                data-browse="Add poster"
+                for="image"
+              >
+                Choose photo...
+              </label>
+            </div>
+          </div>
+          <button
+            class="btn btn-success"
+            type="submit"
+          >
+            Add movie
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

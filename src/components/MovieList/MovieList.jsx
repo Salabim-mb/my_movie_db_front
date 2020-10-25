@@ -78,13 +78,13 @@ const MovieList = () => {
 
     // metoda na pokazanie spinnera ładowania kiedy loading = true
     const renderSpinner = () => {
-        return <Spinner animation="border" role="status" />
+        return <div className="d-flex justify-content-center"><Spinner animation="border" role="status" /></div>
     };
 
     const refreshMovieList = (id) => {
         let movies = movieList.filter(item => item.id !== id);
         setMovieList(movies)
-    }
+    };
 
     return (
         <Page>

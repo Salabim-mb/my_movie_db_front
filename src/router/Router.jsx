@@ -15,7 +15,7 @@ const Router = (props) => {
                 ({component: Component, path, ...rest}) => {
                     return (
                         <Route path={path} key={path} {...rest}>
-                            <Component {...rest} />
+                            <Component {...props} {...rest} />
                         </Route>
                     );
                 }

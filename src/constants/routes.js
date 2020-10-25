@@ -1,3 +1,4 @@
+import MovieForm from "../components/MovieForm/MovieForm";
 import MovieList from "../components/MovieList";
 
 const paths = {
@@ -5,10 +6,21 @@ const paths = {
     LOGIN: "/login",
     REGISTER: "/register",
     MOVIES: "/movies",
-    NEW_MOVIE: "/movies/new"
+    NEW_MOVIE: "/movies/new",
+    EDIT_MOVIE: "/movies/new/:id"
 };
 
 export default [
+    {
+        path: paths.NEW_MOVIE,
+        exact: true,
+        component: MovieForm
+    },
+    {
+        path: paths.EDIT_MOVIE,
+        exact: true,
+        component: MovieForm
+    },
     {
         path: paths.MOVIES,
         exact: true,
