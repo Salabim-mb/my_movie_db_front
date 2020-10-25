@@ -70,7 +70,7 @@ describe("MovieCard", () => {
     });
 
     it("should match snapshot", () => {
-        const {container, getByText} = render(
+        const {container} = render(
             <MemoryRouter>
                 <MovieCard movie={data} setlist={setList}/>
             </MemoryRouter>
@@ -126,7 +126,7 @@ describe("MovieCard", () => {
     });
 
     it("should not find movie", () => {
-        const {getByText, toHaveBeenCalledWith} = render(
+        const {getByText} = render(
             <MemoryRouter>
                 <MovieCard movie={data} setlist={setList}/>
             </MemoryRouter>
@@ -138,6 +138,19 @@ describe("MovieCard", () => {
         };
         fireEvent.click( getByText("Remove") );
         expect(fetch).toHaveBeenCalledWith(url, {headers, "method": "DELETE"});
+    });
+
+    it("should render error alert on api fail", async () => {
+        apiFail = true;
+        const {getByText} = render(
+            <MemoryRouter>
+                <MovieCard movie={data} setlist={setList} />
+            </MemoryRouter>
+        );
+
+        fireEvent.click(getByText("Remove"));
+        await waitForElement(() => getByText("Something went wrong", {exact: false}));
+        expect(getByText("Something went wrong", {exact: false})).toBeInTheDocument();
     });
 
 });

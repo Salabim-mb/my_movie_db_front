@@ -5,6 +5,7 @@ import './MovieCard.css';
 import {paths} from "../../../constants/routes";
 import {IndexLinkContainer} from "react-router-bootstrap";
 import {backend} from "../../../constants/backend";
+import {Alert} from "react-bootstrap";
 
 
 
@@ -34,6 +35,7 @@ const removeMovie = async (id) => {
 const MovieCard = ({movie, setlist}) => {
 
     const [disabled, setDisabled] = useState(false);
+    const [error, setError] = useState(false);
     const handleRemoveMovie = async (event) => {
         setDisabled(true);
         event.preventDefault();
@@ -42,10 +44,11 @@ const MovieCard = ({movie, setlist}) => {
             setlist(movie.id);
         } catch(e) {
             console.log(e);
+            setError(true);
         } finally {
             setDisabled(false);
         }
-    }
+    };
 
     return (
         <div className="card mb-3">
@@ -82,6 +85,9 @@ const MovieCard = ({movie, setlist}) => {
                     </div>
                 </div>
             </div>
+            {
+                error && <Alert variant="danger">Something went wrong while trying to delete this movie.</Alert>
+            }
         </div>
     )
 };
