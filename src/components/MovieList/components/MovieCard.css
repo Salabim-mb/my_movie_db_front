@@ -1,0 +1,19 @@
+.MovieCard {
+    text-align: justify;
+    margin-left: 3%;
+}
+
+.ThumbnailImage {
+    max-width: 180px;
+}
+
+.Button {
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    right: 0;
+}
+
+.ButtonRemove {
+   margin-left: 0.20rem;
+}

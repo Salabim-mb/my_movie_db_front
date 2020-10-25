@@ -13,7 +13,7 @@ export default [
         path: paths.MOVIES,
         exact: true,
         component: MovieList
-    }r
+    }
 ]
 
 export {paths};

@@ -34,12 +34,12 @@ const getMovies = async () => {
 };
 
 const MovieList = () => {
-    /*
-        poniżej pokazany jest sposób zapisu stanu komponenetu funkcyjnego, taka składnia zastępuje konstruktor
-        komponent klasowy (taki sam) umieszczę w MovieListClassComponent.jsx
-        loading, error - boolean (stan początkowy false)
-        movieList - lista, dlatego mamy useState([])
-     */
+   /*
+       poniżej pokazany jest sposób zapisu stanu komponenetu funkcyjnego, taka składnia zastępuje konstruktor
+       komponent klasowy (taki sam) umieszczę w MovieListClassComponent.jsx
+       loading, error - boolean (stan początkowy false)
+       movieList - lista, dlatego mamy useState([])
+    */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [movieList, setMovieList] = useState([]);
@@ -54,7 +54,9 @@ const MovieList = () => {
                 // (najczęściej będzie to 400 Bad Request xd)
                 let res = await getMovies();
                 // mamy odpowiedź, teraz trzeba ją zmapować, bo backend może używać innych nazw pól
+
                 setMovieList( res );
+
             } catch(e) {
                 // nie wyszło z GET'em, więc można wypisać na konsolę to co rzuciliśmy w getMovies()
                 // i ustawić flagę error na true
@@ -79,6 +81,11 @@ const MovieList = () => {
         return <Spinner animation="border" role="status" />
     };
 
+    const refreshMovieList = (id) => {
+        let movies = movieList.filter(item => item.id !== id);
+        setMovieList(movies)
+    }
+
     return (
         <Page>
             {/*{ można wyszukiwarkę dopisać, czysto frontendowa }*/}
@@ -87,7 +94,7 @@ const MovieList = () => {
                 error ? renderErrorAlert() :
                 loading ? renderSpinner() :
                 movieList.map((item) => (
-                    <MovieCard key={item?.id} movie={item} />
+                    <MovieCard key={item?.id} movie={item} setlist={refreshMovieList}/>
                 ))
             }
         </Page>
