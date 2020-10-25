@@ -15,21 +15,26 @@ import {useLocation} from "react-router";
 
 // komponenty z wielkiej litery (te importowane wyżej) pochodzą z pakietu react-bootstrap, który ma predefiniowane style,
 // a te zaimportowałem wcześniej ;)
+
 const MyNavbar = () => {
     let location = useLocation();
 
     return (
         <Navbar bg="dark" variant="dark">
-            <Nav>
+            <IndexLinkContainer to={paths.MAIN}>
+                <Nav.Link className="mr-5">
+                    <Navbar.Brand>
+                        MyMovieDB
+                    </Navbar.Brand>
+                </Nav.Link>
+            </IndexLinkContainer>
+            <Nav className="mr-auto">
                 {/*{ "logo" apki, zamykane w IndexLinkContainer, żeby nie odświeżało po kliknięciu (ale nie jest to jedyna metoda) ;) }*/}
-                <IndexLinkContainer to={paths.MAIN}>
+                <IndexLinkContainer to={paths.MOVIES}>
                     <Nav.Link>
-                        <Navbar.Brand>
-                            MyMovieDB
-                        </Navbar.Brand>
+                        Movie list
                     </Nav.Link>
                 </IndexLinkContainer>
-
             </Nav>
             {/*{ justify-content-end to bootstrap, wrzucamy go w property className. Dzięki temu nasz komponent będzie wyrównany do prawej }*/}
             {

@@ -5,19 +5,25 @@ exports[`MyNavbar should match snapshot 1`] = `
   <nav
     class="navbar navbar-expand navbar-dark bg-dark"
   >
+    <a
+      class="mr-5 active nav-link"
+      href="/"
+    >
+      <span
+        class="navbar-brand"
+      >
+        MyMovieDB
+      </span>
+    </a>
     <div
-      class="navbar-nav"
+      class="mr-auto navbar-nav"
     >
       <a
-        class="active nav-link"
-        data-rb-event-key="/"
-        href="/"
+        class="nav-link"
+        data-rb-event-key="/movies"
+        href="/movies"
       >
-        <span
-          class="navbar-brand"
-        >
-          MyMovieDB
-        </span>
+        Movie list
       </a>
     </div>
     <div
