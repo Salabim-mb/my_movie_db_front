@@ -20,8 +20,8 @@ const sendMovie = async (method, data, id) => {
         headers,
         body: JSON.stringify(data)
     });
-
-    if (res.status === 200) {
+    let status = method === "PUT" ? 200 : 201;
+    if (res.status === status) {
         return await res.json();
     } else {
         throw res.status;
@@ -59,7 +59,7 @@ const MovieForm = () => {
         director: "",
         genre: "",
         releaseDate: undefined,
-        image: null,
+        image: "",
         description: ""
     });
     const [photoLabel, setPhotoLabel] = useState(null);
@@ -77,7 +77,6 @@ const MovieForm = () => {
     const location = useParams();
 
     useEffect(() => {
-        console.log(location)
         const loadMovie = async () => {
             setLoading(true);
             try {
@@ -94,7 +93,7 @@ const MovieForm = () => {
         if (location?.id) {
             loadMovie();
         }
-    }, [location.id]);
+    }, []);
 
     const prepareData = () => ({
         movieName: data.name,
@@ -107,13 +106,12 @@ const MovieForm = () => {
 
     const handleSubmit = async (event) => {
         setError(false);
-        setDisabled(true);
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            setValidated(true);
+            setDisabled(true);
             try {
             //    prepareData();
                 await sendMovie(method, prepareData(), location?.id);
@@ -121,9 +119,11 @@ const MovieForm = () => {
             } catch(e) {
                 console.log(e);
                 setError(true);
+            } finally {
+                setDisabled(false);
             }
         }
-        setDisabled(false);
+        setValidated(true);
     };
 
     const onPhotoChange = async () => {
@@ -150,7 +150,7 @@ const MovieForm = () => {
                     <Alert variant="danger">Something went wrong while trying to get movie data.</Alert>
                 ) : (
                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        <Form.Group>
+                        <Form.Group controlId="name">
                             <Form.Label>Movie title</Form.Label>
                             <Form.Control
                                 value={data.name}
@@ -164,7 +164,7 @@ const MovieForm = () => {
                                 Please provide movie title
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group controlId="director">
                             <Form.Label>Director</Form.Label>
                             <Form.Control
                                 value={data.director}
@@ -178,7 +178,7 @@ const MovieForm = () => {
                                 Please provide movie director
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group controlId="genre">
                             <Form.Label>Genre</Form.Label>
                             <Form.Control
                                 value={data.genre}
@@ -192,24 +192,9 @@ const MovieForm = () => {
                                 Please provide genre
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Director</Form.Label>
-                            <Form.Control
-                                value={data.director}
-                                onChange={(e) => setData({...data, director: e.target.value})}
-                                name="director"
-                                required
-                                placeholder="Christopher Nolan"
-                                type="text"
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide genre
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label htmlFor="relY">Year of release</Form.Label>
+                        <Form.Group controlId="releaseDate">
+                            <Form.Label>Year of release</Form.Label>
                             <DatePicker
-                                id="relY"
                                 className="form-control"
                                 placeholderText="2014"
                                 dateFormat="yyyy"
@@ -223,7 +208,7 @@ const MovieForm = () => {
                                 Please provide a release year
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group controlId="description">
                             <Form.Label>Description</Form.Label>
                             <Form.Control
                                 value={data.description}
@@ -238,7 +223,7 @@ const MovieForm = () => {
                                 Please provide a short description
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group controlId="image">
                             <Form.Label>Movie poster</Form.Label>
                             <Form.File
                                 className="text-nowrap text-truncate"
@@ -258,7 +243,7 @@ const MovieForm = () => {
                             {disabled ? "Loading..." : method === "POST" ? "Add movie" : "Update movie"}
                         </Button>
                         {photoError && <Alert variant="danger">Photo could not be uploaded. Please try again.</Alert>}
-                        {resCorrect && <Alert variant="success">Movie added successfully.</Alert>}
+                        {resCorrect && <Alert variant="success">Movie {method === "PUT" ? "updated" : "added"} successfully.</Alert>}
                         {error && <Alert variant="danger">Something went wrong while adding your movie.</Alert>}
                     </Form>
                 )
