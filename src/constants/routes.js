@@ -7,7 +7,8 @@ const paths = {
     REGISTER: "/register",
     MOVIES: "/movies",
     NEW_MOVIE: "/movies/new",
-    EDIT_MOVIE: "/movies/new/:id"
+    EDIT_MOVIE: "/movies/new/:id",
+    USER_PAGE: "/user"
 };
 
 export default [
