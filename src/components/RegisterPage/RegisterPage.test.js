@@ -30,9 +30,9 @@ describe("RegisterPage", () => {
         global.fetch = jest.fn().mockImplementation((input, init) => {
             return new Promise((resolve, reject) => {
                 if (apiFail) {
-                    Promise.resolve({status: 500})
+                    resolve({status: 500})
                 } else {
-                    Promise.resolve({status: 201, json: () => Promise.resolve({token: token})});
+                    resolve({status: 201, json: () => Promise.resolve({token: token})});
                 }
             });
         });
@@ -62,58 +62,58 @@ describe("RegisterPage", () => {
     });
 
     it("should block from posting if passwords dont match", () => {
-        const {getByText, getByLabelText} = render(
+        const {getByText, getByPlaceholderText} = render(
             <MemoryRouter>
                 <RegisterPage/>
             </MemoryRouter>
         );
 
-        fireEvent.change(getByLabelText("Name"), {
+        fireEvent.change(getByPlaceholderText("John"), {
             target: {value: data.name}
         });
-        fireEvent.change(getByLabelText("Surname"), {
+        fireEvent.change(getByPlaceholderText("Doe"), {
             target: {value: data.surname}
         });
-        fireEvent.change(getByLabelText("Email"), {
+        fireEvent.change(getByPlaceholderText("johndoe@example.com"), {
             target: {value: data.email}
         });
-        fireEvent.change(getByLabelText("Password"), {
+        fireEvent.change(getByPlaceholderText("Your password"), {
             target: {value: data.password}
         });
-        fireEvent.change(getByLabelText("Repeat password"), {
+        fireEvent.change(getByPlaceholderText("Your password again"), {
             target: {value: data.repeat_password + "1"}
         });
 
-        fireEvent.click(getByText("Sign me up"));
+        fireEvent.click(getByText("Sign me up!"));
 
-        expect(getByText("Passwords don't match!")).toBeInTheDocument();
+        expect(getByText("Passwords must be equal")).toBeInTheDocument();
         expect(fetch).toHaveBeenCalledTimes(0);
     });
 
     it("should register correctly", async () => {
-        const {getByText, getByLabelText} = render(
+        const {history, getByText, getByPlaceholderText} = renderWithRouter(
             <MemoryRouter>
                 <RegisterPage/>
             </MemoryRouter>
         );
 
-        fireEvent.change(getByLabelText("Name"), {
+        fireEvent.change(getByPlaceholderText("John"), {
             target: {value: data.name}
         });
-        fireEvent.change(getByLabelText("Surname"), {
+        fireEvent.change(getByPlaceholderText("Doe"), {
             target: {value: data.surname}
         });
-        fireEvent.change(getByLabelText("Email"), {
+        fireEvent.change(getByPlaceholderText("johndoe@example.com"), {
             target: {value: data.email}
         });
-        fireEvent.change(getByLabelText("Password"), {
+        fireEvent.change(getByPlaceholderText("Your password"), {
             target: {value: data.password}
         });
-        fireEvent.change(getByLabelText("Repeat password"), {
+        fireEvent.change(getByPlaceholderText("Your password again"), {
             target: {value: data.repeat_password}
         });
 
-        fireEvent.click(getByText("Sign me up"));
+        fireEvent.click(getByText("Sign me up!"));
 
         await waitForElement(() => getByText("Registered successfully", {exact: false}));
 
@@ -122,30 +122,31 @@ describe("RegisterPage", () => {
 
     it("should view alert on api fail", async () => {
         apiFail = true;
-        const {getByText, getByLabelText} = render(
+        const {getByText, getByPlaceholderText} = render(
             <MemoryRouter>
                 <RegisterPage/>
             </MemoryRouter>
         );
 
-        fireEvent.change(getByLabelText("Name"), {
+        fireEvent.change(getByPlaceholderText("John"), {
             target: {value: data.name}
         });
-        fireEvent.change(getByLabelText("Surname"), {
+        fireEvent.change(getByPlaceholderText("Doe"), {
             target: {value: data.surname}
         });
-        fireEvent.change(getByLabelText("Email"), {
+        fireEvent.change(getByPlaceholderText("johndoe@example.com"), {
             target: {value: data.email}
         });
-        fireEvent.change(getByLabelText("Password"), {
+        fireEvent.change(getByPlaceholderText("Your password"), {
             target: {value: data.password}
         });
-        fireEvent.change(getByLabelText("Repeat password"), {
+        fireEvent.change(getByPlaceholderText("Your password again"), {
             target: {value: data.repeat_password}
         });
 
-        fireEvent.click(getByText("Sign me up"));
+        fireEvent.click(getByText("Sign me up!"));
 
+        await expect(fetch).toHaveBeenCalledTimes(1);
         await waitForElement(() => getByText("Something went wrong", {exact: false}));
 
         expect(getByText("Something went wrong", {exact: false})).toBeInTheDocument();

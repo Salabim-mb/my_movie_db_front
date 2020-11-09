@@ -1,0 +1,14 @@
+.card__container {
+    margin: 10rem 25%;
+    vertical-align: middle;
+}
+
+.card__header {
+    text-align: center;
+}
+
+@media(max-width: 768px) {
+    .card__container {
+        margin: auto 5%;
+    }
+}

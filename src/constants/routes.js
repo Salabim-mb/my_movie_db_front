@@ -1,5 +1,6 @@
 import MovieForm from "../components/MovieForm/MovieForm";
 import MovieList from "../components/MovieList";
+import RegisterPage from "../components/RegisterPage/RegisterPage";
 
 const paths = {
     MAIN: "/",
@@ -25,6 +26,11 @@ export default [
         path: paths.MOVIES,
         exact: true,
         component: MovieList
+    },
+    {
+        path: paths.REGISTER,
+        exact: true,
+        component: RegisterPage
     }
 ]
 
