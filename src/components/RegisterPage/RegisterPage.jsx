@@ -132,7 +132,7 @@ const RegisterPage = () => {
                             onChange={handlePassword}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Password must be at least 8 characters long, contain one capital, one number and one special character
+                            Password must be at least 8 characters long
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="passwordR">
