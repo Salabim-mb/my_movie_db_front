@@ -1,5 +1,6 @@
 import MovieForm from "../components/MovieForm/MovieForm";
 import MovieList from "../components/MovieList";
+import LoginPage from "../components/LoginPage/LoginPage";
 
 const paths = {
     MAIN: "/",
@@ -26,6 +27,11 @@ export default [
         path: paths.MOVIES,
         exact: true,
         component: MovieList
+    },
+    {
+        path: paths.LOGIN,
+        exact: true,
+        component: LoginPage
     }
 ]
 
