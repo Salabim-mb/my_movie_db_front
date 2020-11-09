@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Alert, Button, Card, Col, Form, Row} from "react-bootstrap";
 import {backend} from "../../constants/backend";
 import {getHeaders} from "../../utils/CORSHeaders";
@@ -6,6 +6,7 @@ import "./RegisterPage.css";
 import {IndexLinkContainer} from 'react-router-bootstrap';
 import {paths} from "../../constants/routes";
 import {Redirect} from "react-router";
+import {UserContext} from "../../context/UserContext";
 
 const registerUser = async (data) => {
     let url = `${backend.USERS}register/`;
@@ -38,6 +39,8 @@ const RegisterPage = () => {
     const [correct, setCorrect] = useState(false);
     const [redirect, setRedirect] = useState(false);
 
+    const user = useContext(UserContext);
+
     const submitForm = async (e) => {
         e.preventDefault();
         setError(false);
@@ -47,8 +50,8 @@ const RegisterPage = () => {
         } else {
             setDisabled(true);
             try {
-                let {token} = await registerUser(data);
-                // need to create context
+                let {token, userData} = await registerUser(data);
+                user.login(token, userData);
                 setCorrect(true);
                 setTimeout(() => setRedirect(true), 3000);
             } catch(e) {
