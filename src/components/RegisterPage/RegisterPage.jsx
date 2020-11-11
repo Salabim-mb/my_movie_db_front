@@ -9,7 +9,7 @@ import {Redirect} from "react-router";
 import {UserContext} from "../../context/UserContext";
 
 const registerUser = async (data) => {
-    let url = `${backend.USERS}register/`;
+    let url = `${backend.PLAIN}register/`;
     let headers = getHeaders();
 
     let res = await fetch(url, {
