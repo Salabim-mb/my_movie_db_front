@@ -4,7 +4,7 @@ export const getHeaders = (token = null) => {
     };
 
     if (token !== null) {
-        data = {...data, "Token": token}
+        data = {...data, "token": token}
     }
 
     return data;

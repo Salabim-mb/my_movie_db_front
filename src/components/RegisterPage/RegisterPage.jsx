@@ -56,11 +56,12 @@ const RegisterPage = () => {
             setDisabled(true);
             try {
                 let {userToken, userName, userSurname, userEmail} = await registerUser(data);
-                user.login(userToken, {
+                let userData = {
                     name: userName,
                     surname: userSurname,
                     email: userEmail
-                });
+                };
+                user.login(userToken, userData);
                 setCorrect(true);
                 setTimeout(() => setRedirect(true), 3000);
             } catch(e) {

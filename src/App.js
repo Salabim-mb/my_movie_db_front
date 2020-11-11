@@ -3,15 +3,18 @@ import './App.css';
 import Router from "./router/Router";
 import {BrowserRouter} from "react-router-dom";
 import {MyNavbar} from "./components";
+import {UserProvider} from "./context/UserContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <MyNavbar />
-        <Router />
-      </div>
-    </BrowserRouter>
+    <UserProvider>
+        <BrowserRouter>
+            <div className="App">
+                <MyNavbar />
+                <Router />
+            </div>
+        </BrowserRouter>
+    </UserProvider>
   );
 }
 
