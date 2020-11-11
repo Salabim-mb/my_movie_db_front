@@ -15,7 +15,12 @@ const registerUser = async (data) => {
     let res = await fetch(url, {
         method: "POST",
         headers,
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            userName: data.name,
+            userSurname: data.surname,
+            userEmail: data.email,
+            userPassword: data.password
+        })
     });
 
     if (res.status === 200 || res.status === 201) {
@@ -50,8 +55,12 @@ const RegisterPage = () => {
         } else {
             setDisabled(true);
             try {
-                let {token, userData} = await registerUser(data);
-                user.login(token, userData);
+                let {userToken, userName, userSurname, userEmail} = await registerUser(data);
+                user.login(userToken, {
+                    name: userName,
+                    surname: userSurname,
+                    email: userEmail
+                });
                 setCorrect(true);
                 setTimeout(() => setRedirect(true), 3000);
             } catch(e) {
