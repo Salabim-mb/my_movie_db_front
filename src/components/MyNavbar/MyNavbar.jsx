@@ -5,7 +5,7 @@ import { IndexLinkContainer } from "react-router-bootstrap";
 // tzn ścieżka powinna wyglądać "constants/routes" zamiast "../..itd",
 // ale nie wiem czemu to nie działa, a nie chce mi się grzebać w takich pierdołach xd
 import {paths} from "../../constants/routes";
-import {useLocation} from "react-router";
+import {useHistory} from "react-router";
 import {UserContext} from "../../context/UserContext";
 import {backend} from "../../constants/backend";
 import {getHeaders} from "../../utils/CORSHeaders";
@@ -35,7 +35,7 @@ const logoutUser = async(token) => {
 
 const MyNavbar = () => {
     let user = useContext(UserContext);
-    let location = useLocation();
+    let location = useHistory();
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -45,7 +45,7 @@ const MyNavbar = () => {
             console.log(e);
         } finally {
             user.logout();
-
+            location.push(paths.MAIN)
         }
     };
 
