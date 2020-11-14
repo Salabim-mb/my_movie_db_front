@@ -77,10 +77,16 @@ const MyNavbar = () => {
                             </Button>
                         </IndexLinkContainer>
                         {
-                            user?.token && (
+                            user?.token ? (
                                 <Button variant="light" onClick={handleLogout}>
                                     Log out
                                 </Button>
+                            ) : (
+                                <IndexLinkContainer to={paths.LOGIN}>
+                                    <Button variant="light">
+                                        Log in
+                                    </Button>
+                                </IndexLinkContainer>
                             )
                         }
                     </Navbar.Collapse>
