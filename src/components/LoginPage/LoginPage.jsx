@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Alert, Button, Card, Col, Form, Row} from "react-bootstrap";
 import {backend} from "../../constants/backend";
 import {getHeaders} from "../../utils/CORSHeaders";
@@ -6,6 +6,7 @@ import "./LoginPage.css";
 import {IndexLinkContainer} from 'react-router-bootstrap';
 import {paths} from "../../constants/routes";
 import {Redirect} from "react-router";
+import {UserContext} from "../../context/UserContext";
 
 const loginUser = async (data) => {
     let url = `${backend.LOGIN}`;
@@ -14,7 +15,10 @@ const loginUser = async (data) => {
     let res = await fetch(url, {
         method: "POST",
         headers,
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            userEmail: data.email,
+            userPassword: data.password
+        })
     });
 
     if (res.status === 200 || res.status === 201) {
@@ -35,6 +39,8 @@ const LoginPage = () => {
     const [correct, setCorrect] = useState(false);
     const [redirect, setRedirect] = useState(false);
 
+    const user = useContext(UserContext);
+
     const submitForm = async (e) => {
         e.preventDefault();
         setError(false);
@@ -44,7 +50,12 @@ const LoginPage = () => {
         } else {
             setDisabled(true);
             try {
-                let {token} = await loginUser(data);
+                let {userToken, userName, userSurname, userEmail} = await loginUser(data);
+                user.login(userToken, {
+                    name: userName,
+                    surname: userSurname,
+                    email: userEmail
+                });
                 setCorrect(true);
                 setTimeout(() => setRedirect(true), 3000);
             } catch(e) {
