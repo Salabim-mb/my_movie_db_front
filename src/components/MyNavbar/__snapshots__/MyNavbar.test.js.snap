@@ -35,6 +35,12 @@ exports[`MyNavbar should match snapshot 1`] = `
       >
         + Add movie
       </a>
+      <a
+        class="btn btn-light"
+        href="/login"
+      >
+        Log in
+      </a>
     </div>
   </nav>
 </div>
