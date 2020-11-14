@@ -45,7 +45,6 @@ const LoginPage = () => {
             setDisabled(true);
             try {
                 let {token} = await loginUser(data);
-                // need to create context
                 setCorrect(true);
                 setTimeout(() => setRedirect(true), 3000);
             } catch(e) {
@@ -65,7 +64,7 @@ const LoginPage = () => {
             <Card.Body>
                 <Form noValidate validated={validated} onSubmit={submitForm}>
                     <Form.Group controlId="email">
-                        <Form.Label>Email:</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control
                             type="email"
                             required
@@ -78,7 +77,7 @@ const LoginPage = () => {
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="password">
-                        <Form.Label>Password:</Form.Label>
+                        <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"
                             minLength={8}
@@ -102,10 +101,10 @@ const LoginPage = () => {
                         </Button>
                     </div>
                     <IndexLinkContainer to={paths.REGISTER}>
-                        <Card.Link>Do not have an account? Sign up!</Card.Link>
+                        <Card.Link>Don't have an account? Sign up!</Card.Link>
                     </IndexLinkContainer>
                     {error && <Alert variant="danger">Something went wrong while trying to login user</Alert>}
-                    {correct && <Alert variant="success">Registered successfully. Redirecting...</Alert>}
+                    {correct && <Alert variant="success">Login successful. Redirecting...</Alert>}
                     {redirect && <Redirect to={paths.MAIN}/>}
                 </Form>
             </Card.Body>

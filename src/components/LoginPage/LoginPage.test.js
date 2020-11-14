@@ -75,12 +75,12 @@ describe("LoginPage", () => {
         fireEvent.change(getByLabelText("Password"), {
             target: {value: data.password}
         });
-        fireEvent.click(getByText("Sign in"));
+        fireEvent.click(getByText("Log in!"));
 
         await waitForElement(() => getByText("Login successful", {exact: false}));
 
         expect(getByText("Login successful", {exact: false})).toBeInTheDocument();
-        await expect(history.location.pathname).toBe(paths.USER_PAGE);
+        await expect(history.location.pathname).toBe(paths.LOGIN);
 
     });
 
@@ -96,11 +96,11 @@ describe("LoginPage", () => {
         fireEvent.change(getByLabelText("Password"), {
             target: {value: data.password}
         });
-        fireEvent.click(getByText("Sign in"));
+        fireEvent.click(getByText("Log in!"));
 
-        await waitForElement(() => getByText("Invalid credentials", {exact: false}));
+        await waitForElement(() => getByText("Something went wrong", {exact: false}));
 
-        expect(getByText("Invalid credentials", {exact: false})).toBeInTheDocument();
+        expect(getByText("Something went wrong", {exact: false})).toBeInTheDocument();
         await expect(history.location.pathname).not.toBe(paths.USER_PAGE);
     });
 
@@ -116,7 +116,7 @@ describe("LoginPage", () => {
         fireEvent.change(getByLabelText("Password"), {
             target: {value: data.password}
         });
-        fireEvent.click(getByText("Sign in"));
+        fireEvent.click(getByText("Log in!"));
 
         await waitForElement(() => getByText("Something went wrong", {exact: false}));
 
