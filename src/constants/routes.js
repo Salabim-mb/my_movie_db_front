@@ -2,6 +2,7 @@ import MovieForm from "../components/MovieForm/MovieForm";
 import MovieList from "../components/MovieList";
 import LoginPage from "../components/LoginPage/LoginPage";
 import RegisterPage from "../components/RegisterPage/RegisterPage";
+import UserPage from "../components/UserPage/UserPage";
 
 const paths = {
     MAIN: "/",
@@ -37,6 +38,11 @@ export default [
         path: paths.REGISTER,
         exact: true,
         component: RegisterPage
+    },
+    {
+        path: paths.USER_PAGE,
+        exact: true,
+        component: UserPage
     }
 ]
 
