@@ -18,7 +18,6 @@ export const UserProvider = (props) => {
         token,
         data,
         login: (newToken, newData) => {
-            console.log("here")
             cookies.set("token", newToken, {
                 path: "/"
             });

@@ -1,5 +1,6 @@
 import MovieForm from "../components/MovieForm/MovieForm";
 import MovieList from "../components/MovieList";
+import LoginPage from "../components/LoginPage/LoginPage";
 import RegisterPage from "../components/RegisterPage/RegisterPage";
 
 const paths = {
@@ -8,7 +9,8 @@ const paths = {
     REGISTER: "/register",
     MOVIES: "/movies",
     NEW_MOVIE: "/movies/new",
-    EDIT_MOVIE: "/movies/new/:id"
+    EDIT_MOVIE: "/movies/new/:id",
+    USER_PAGE: "/user"
 };
 
 export default [
@@ -28,6 +30,10 @@ export default [
         component: MovieList
     },
     {
+        path: paths.LOGIN,
+        exact: true,
+        component: LoginPage
+    }, {
         path: paths.REGISTER,
         exact: true,
         component: RegisterPage
