@@ -16,7 +16,7 @@ const UserPage = () => {
             setGetError(true);
 
         }
-    }, []);
+    }, [user.data]);
 
     return (getError ? (
             <Alert variant="danger">Something went wrong while trying to fetch user data.</Alert>

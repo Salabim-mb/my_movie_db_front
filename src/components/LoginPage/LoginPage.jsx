@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {Alert, Button, Card, Col, Form, Row} from "react-bootstrap";
+import {Alert, Button, Card, Form} from "react-bootstrap";
 import {backend} from "../../constants/backend";
 import {getHeaders} from "../../utils/CORSHeaders";
 import "./LoginPage.css";
@@ -116,7 +116,7 @@ const LoginPage = () => {
                     </IndexLinkContainer>
                     {error && <Alert variant="danger">Something went wrong while trying to login user</Alert>}
                     {correct && <Alert variant="success">Login successful. Redirecting...</Alert>}
-                    {redirect && <Redirect to={paths.MAIN}/>}
+                    {redirect && <Redirect to={paths.USER_PAGE}/>}
                 </Form>
             </Card.Body>
         </Card>
