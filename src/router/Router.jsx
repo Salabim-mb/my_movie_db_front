@@ -1,6 +1,7 @@
 import React from 'react';
-import routes from "../constants/routes"
-import {Route, Switch, useLocation} from "react-router";
+import routes, {paths} from "../constants/routes"
+import {Redirect, Route, Switch, useLocation} from "react-router";
+import {UserContext} from "../context/UserContext";
 
 const Router = (props) => {
     // nazwa = (props) => {...}, argumentów używamy props.arg1, props.arg2 itd
@@ -10,17 +11,28 @@ const Router = (props) => {
     const location = useLocation();
 
     return (
-        <Switch location={location} key={location.pathname}>
-            {routes.map(
-                ({component: Component, path, ...rest}) => {
-                    return (
-                        <Route path={path} key={path} {...rest}>
-                            <Component {...props} {...rest} />
-                        </Route>
-                    );
-                }
+        <UserContext.Consumer>
+            {(value) => (
+                <Switch location={location} key={location.pathname}>
+                    {routes.map(
+                        ({
+                             component: Component,
+                             path,
+                             requiresLogin,
+                             ...rest
+                         }) => {
+                            return !requiresLogin || (requiresLogin && value?.token) ? (
+                                <Route path={path} key={path} {...rest}>
+                                    <Component {...props} {...rest} />
+                                </Route>
+                            ) : (
+                                <Redirect to={paths.MAIN} />
+                            );
+                        }
+                    )}
+                </Switch>
             )}
-        </Switch>
+        </UserContext.Consumer>
     )
 };
 

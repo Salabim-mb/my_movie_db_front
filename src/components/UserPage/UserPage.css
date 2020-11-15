@@ -1,0 +1,26 @@
+.userCard {
+    text-align: center;
+    margin-left: 6%;
+}
+
+.userBoxCard {
+    margin-left: 8rem;
+    margin-right: 8rem;
+    margin-top: 5rem;
+}
+
+.ThumbnailImage {
+    max-width: 180px;
+    margin: 2%;
+}
+
+.userText {
+    font-size: 30px;
+}
+
+.Button {
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    right: 0;
+}

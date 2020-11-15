@@ -175,7 +175,7 @@ const RegisterPage = () => {
                     </IndexLinkContainer>
                     {error && <Alert variant="danger">Something went wrong while trying to register user</Alert>}
                     {correct && <Alert variant="success">Registered successfully. Redirecting...</Alert>}
-                    {redirect && <Redirect to={paths.MAIN}/>}
+                    {redirect && <Redirect to={paths.USER_PAGE}/>}
                 </Form>
             </Card.Body>
         </Card>
