@@ -112,5 +112,20 @@ describe("MyNavbar", () => {
         // expect(history.location.pathname).toBe(paths.MAIN);
     });
 
+    it("should redirect to user page when logged in", () => {
+        const {history, getByText} = renderWithRouter(
+            <UserContext.Provider value={context}>
+                <MyNavbar />
+            </UserContext.Provider>
+        );
+        fireEvent.click(getByText("User Page"));
+        expect(history.location.pathname).toBe(paths.USER_PAGE, {exact: false});
+    });
 
+    it("should not find user page button when not logged in", () => {
+        const {queryByText} = renderWithRouter(
+            <MyNavbar />
+        );
+        expect(queryByText("User Page",{exact: false})).not.toBeInTheDocument()
+    });
 });
