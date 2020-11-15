@@ -65,6 +65,18 @@ const MyNavbar = () => {
                         Movie list
                     </Nav.Link>
                 </IndexLinkContainer>
+                {
+                    user?.token ? (
+                        <IndexLinkContainer to={paths.USER_PAGE}>
+                            <Nav.Link>
+                                User Page
+                            </Nav.Link>
+                        </IndexLinkContainer>
+                    ) : (
+                        <div>
+                        </div>
+                    )
+                }
             </Nav>
             {/*{ justify-content-end to bootstrap, wrzucamy go w property className. Dzięki temu nasz komponent będzie wyrównany do prawej }*/}
             {
@@ -88,7 +100,9 @@ const MyNavbar = () => {
                                     </Button>
                                 </IndexLinkContainer>
                             )
+
                         }
+
                     </Navbar.Collapse>
                 )
             }
