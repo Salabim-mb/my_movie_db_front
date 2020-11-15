@@ -4,7 +4,6 @@ import {fireEvent, waitForElement, render} from '@testing-library/react';
 import {MemoryRouter, Router} from "react-router-dom";
 import {createMemoryHistory} from 'history';
 import {UserContext} from "../../context/UserContext";
-import RegisterPage from "../RegisterPage/RegisterPage";
 import {paths} from "../../constants/routes";
 
 const renderWithRouter = (
@@ -23,25 +22,14 @@ const renderWithRouter = (
 };
 
 describe("UserPage", () => {
-    let apiFail;
     let context;
-    let userData;
 
     beforeAll(() => {
-        global.fetch = jest.fn().mockImplementation((input, init) => {
-            return new Promise((resolve) => {
-                if (apiFail && !context?.data) {
-                    resolve({status: 500})
-                } else {
-                    resolve({status: 200, json: () => Promise.resolve(userData)});
-                }
-            })
-        });
+
     });
 
     beforeEach(() => {
         jest.clearAllMocks();
-        apiFail = false;
         context = {
             token: "123",
             data: {
@@ -50,11 +38,7 @@ describe("UserPage", () => {
                 email: "jkowal@wp.pl"
             }
         };
-        userData = {
-            name: "John",
-            surname: "Doe",
-            email: "jdoe@example.com"
-        };
+
     });
 
     it("should match snapshot", () => {
@@ -69,8 +53,7 @@ describe("UserPage", () => {
         expect(container).toMatchSnapshot();
     });
 
-    it("should render data if context is defined and api failed", async() => {
-        let apiFail = true;
+    it("should render data if context is defined", async() => {
         const {getByText} = render(
             <UserContext.Provider value={context}>
                 <MemoryRouter>
@@ -84,8 +67,7 @@ describe("UserPage", () => {
         expect(getByText("Jan", {exact: false})).toBeInTheDocument();
     });
 
-    it("should render error on missing context and api fail", async() => {
-        apiFail = true;
+    it("should render error on missing context", async() => {
         context.data = undefined;
         const {getByText} = render(
             <UserContext.Provider value={context}>

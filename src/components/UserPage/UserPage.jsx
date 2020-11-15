@@ -48,15 +48,10 @@ const UserPage = () => {
                                     <Card.Text className="userText">
                                         {user?.data?.email}
                                     </Card.Text>
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {
-                      //  error && <Alert variant="danger">Something went wrong while trying to fetch user data.</Alert>
-                    }
                 </div>
             </div>
         )
