@@ -42,7 +42,8 @@ export default [
     {
         path: paths.USER_PAGE,
         exact: true,
-        component: UserPage
+        component: UserPage,
+        requiresLogin: true
     }
 ]
 

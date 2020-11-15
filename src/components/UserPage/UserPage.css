@@ -1,9 +1,9 @@
-.MovieCard {
+.userCard {
     text-align: center;
     margin-left: 6%;
 }
 
-.userCard {
+.userBoxCard {
     margin-left: 8rem;
     margin-right: 8rem;
     margin-top: 5rem;
@@ -16,4 +16,11 @@
 
 .userText {
     font-size: 30px;
+}
+
+.Button {
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    right: 0;
 }

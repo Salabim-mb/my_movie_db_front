@@ -4,6 +4,8 @@ import {fireEvent, waitForElement, render} from '@testing-library/react';
 import {MemoryRouter, Router} from "react-router-dom";
 import {createMemoryHistory} from 'history';
 import {UserContext} from "../../context/UserContext";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import {paths} from "../../constants/routes";
 
 const renderWithRouter = (
     ui,
@@ -77,9 +79,9 @@ describe("UserPage", () => {
             </UserContext.Provider>
         );
 
-        await waitForElement(() => getByText("First name:"));
+        await waitForElement(() => getByText("Jan"));
 
-        expect(getByText(""))
+        expect(getByText("Jan", {exact: false})).toBeInTheDocument();
     });
 
     it("should render error on missing context and api fail", async() => {
@@ -93,22 +95,19 @@ describe("UserPage", () => {
             </UserContext.Provider>
         );
 
-        await expect(fetch).toHaveBeenCalledTimes(1);
 
         expect(getByText("Something went wrong", {exact: false})).toBeInTheDocument();
     });
 
-    it("should fetch user data on not full context", async() => {
-        const {getByText} = render(
+
+    it("should redirect to movies page", () => {
+        const {history, getByText} = renderWithRouter(
             <UserContext.Provider value={context}>
-                <MemoryRouter>
                     <UserPage />
-                </MemoryRouter>
             </UserContext.Provider>
         );
-    });
+        fireEvent.click(getByText("Movies", {exact: false}));
 
-    it("should redirect to movie page", () => {
-
+        expect(history.location.pathname).toBe(paths.MOVIES);
     });
 });
