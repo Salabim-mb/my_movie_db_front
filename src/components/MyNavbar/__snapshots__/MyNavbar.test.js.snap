@@ -25,6 +25,7 @@ exports[`MyNavbar should match snapshot 1`] = `
       >
         Movie list
       </a>
+      <div />
     </div>
     <div
       class="justify-content-end navbar-collapse collapse"
