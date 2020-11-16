@@ -6,6 +6,7 @@ import {MemoryRouter} from "react-router";
 import {Router} from "react-router-dom";
 import {paths} from "../../constants/routes";
 
+
 const renderWithRouter = (
     ui,
     {

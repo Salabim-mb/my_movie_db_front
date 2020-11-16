@@ -41,7 +41,7 @@ exports[`MovieCard should match snapshot 1`] = `
         class="col-sm-9"
       >
         <div
-          class="MovieCard"
+          class="userCard"
         >
           <div
             class="card-body"

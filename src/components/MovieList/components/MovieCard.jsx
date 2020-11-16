@@ -66,7 +66,7 @@ const MovieCard = ({movie, setlist}) => {
                 </div>
 
                 <div className="col-sm-9">
-                    <div className="MovieCard">
+                    <div className="userCard">
                         <div className="card-body">
                             <Card.Title>
                                 {movie.movieName}
