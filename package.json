@@ -38,9 +38,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://mymoviedbapi.herokuapp.com",
-  "devDependencies": {
-    "@babel/plugin-syntax-jsx": "^7.12.1",
-    "@babel/plugin-transform-react-jsx": "^7.12.5"
-  }
+  "proxy": "http://mymoviedbapi.herokuapp.com"
 }
